@@ -13,7 +13,7 @@ boton.addEventListener('click',()=>{
 
 function generadorPassword(long){
     const tipo=[mayus,minus,numeros,simbolos]
-    
+    //Falta que haya una tipo de dato minimo por cada uno
     let password=[]
 
     for (let i=0;i<long;i++)
@@ -29,4 +29,7 @@ function generadorPassword(long){
     }
     const password_str=password.join('')
     console.log(password_str,password_str.length)
+    const pPassword=document.getElementById("password")
+    console.log(pPassword)
+    pPassword.textContent=`Contraseña generada: ${password_str}`
 }
