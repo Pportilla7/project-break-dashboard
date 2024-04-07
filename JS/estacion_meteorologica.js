@@ -1,9 +1,23 @@
 const apiKey="20f4a9d00fe443d7a9390954240604"
-const city="madrid"
+let city="madrid"
 const days=5
-const urlCurrent=`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&aqi=no`
-const urlNextDays=`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}&aqi=no`
+let urlCurrent=`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&aqi=no`
+let urlNextDays=`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}&aqi=no`
 const divTiempoActual=document.getElementById("tiempo_actual")
+const boton=document.getElementById("buscar_ciudad")
+
+weatherCurrent(urlCurrent)
+weatherNextDays(urlNextDays)
+
+boton.addEventListener("click",()=>{
+    const ciudadInput = document.getElementById("ciudad");
+    city = ciudadInput.value;
+    urlCurrent=`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&aqi=no`
+    urlNextDays=`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}&aqi=no`
+
+    weatherCurrent(urlCurrent)
+    weatherNextDays(urlNextDays)
+})
 
 async function getWeather(url) {
     try {
@@ -19,41 +33,50 @@ async function getWeather(url) {
     }
 }
 
-const weatherCurrentPromise = new Promise((resolve, reject) => {
-    getWeather(urlCurrent)
-        .then(data => {
-            resolve(data); // Resolvemos la promesa con los datos obtenidos
-        })
-        .catch(error => {
-            reject(error); // Rechazamos la promesa con el error obtenido
-        });
-});
+function weatherCurrent(url){
+    const weatherCurrentPromise = new Promise((resolve, reject) => {
+        getWeather(urlCurrent)
+            .then(data => {
+                resolve(data); // Resolvemos la promesa con los datos obtenidos
+            })
+            .catch(error => {
+                reject(error); // Rechazamos la promesa con el error obtenido
+            });
+    });
+    
+    weatherCurrentPromise.then(resultado=>{
+        imprimirResultadosWeatherCurrent(resultado)
+    })
+    .catch(error=>{
+        console.error("Error",error)
+    })
+}
 
-weatherCurrentPromise.then(resultado=>{
-    imprimirResultados(resultado)
-})
-.catch(error=>{
-    console.error("Error",error)
-})
+function weatherNextDays(url){
+    const divTiempoNextDays=document.getElementById("tiempo_nextdays")
+    divTiempoNextDays.innerHTML=''
+    const weatherNextDaysPromise = new Promise((resolve, reject) => {
+        getWeather(urlNextDays)
+            .then(data => {
+                resolve(data); // Resolvemos la promesa con los datos obtenidos
+            })
+            .catch(error => {
+                reject(error); // Rechazamos la promesa con el error obtenido
+            });
+    });
+    
+    weatherNextDaysPromise.then(resultado=>{
+        console.log(resultado)
+        imprimirResultadosNextDays(resultado)
+    })
+    .catch(error=>{
+        console.error("Error",error)
+    })
+}
 
-const weatherNextDaysPromise = new Promise((resolve, reject) => {
-    getWeather(urlNextDays)
-        .then(data => {
-            resolve(data); // Resolvemos la promesa con los datos obtenidos
-        })
-        .catch(error => {
-            reject(error); // Rechazamos la promesa con el error obtenido
-        });
-});
 
-weatherNextDaysPromise.then(resultado=>{
-    imprimirResultados(resultado)
-})
-.catch(error=>{
-    console.error("Error",error)
-})
 
-function imprimirResultados(res){
+function imprimirResultadosWeatherCurrent(res){
     encabezado=document.getElementById("encabezado")
     encabezado.firstChild.textContent=`${res.location.name}/${res.location.country}. Hora local: ${res.location.localtime}`
     
@@ -71,6 +94,22 @@ function imprimirResultados(res){
     console.log(final.firstChild)
     final.firstChild.textContent=`Ultima actualización: ${res.current.last_updated}`
 
-    
 
+
+}
+
+function imprimirResultadosNextDays(res){
+    console.log(res.forecast.forecastday[0].date)
+    const divTiempoNextDays=document.getElementById("tiempo_nextdays")
+    for (let i of res.forecast.forecastday){
+        console.log(i)
+        console.log(i.date)
+        divNextDay=document.createElement("div")
+        divNextDay.innerHTML=`
+        <p>${i.date}</p>
+        <img src="${i.day.condition.icon}" alt="">
+        <p>Min: ${i.day.mintemp_c}ºC  /  Max: ${i.day.maxtemp_c}ºC</p>
+        `
+        divTiempoNextDays.appendChild(divNextDay)
+    }
 }
