@@ -6,8 +6,9 @@ let urlNextDays=`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${c
 const divTiempoActual=document.getElementById("tiempo_actual")
 const boton=document.getElementById("buscar_ciudad")
 
-weatherCurrent(urlCurrent)
-weatherNextDays(urlNextDays)
+//weatherCurrent(urlCurrent)
+getWeather(urlCurrent,true)
+getWeather(urlNextDays,false)
 
 boton.addEventListener("click",()=>{
     const ciudadInput = document.getElementById("ciudad");
@@ -15,65 +16,29 @@ boton.addEventListener("click",()=>{
     urlCurrent=`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&aqi=no`
     urlNextDays=`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}&aqi=no`
 
-    weatherCurrent(urlCurrent)
-    weatherNextDays(urlNextDays)
+    getWeather(urlCurrent,true)
+    getWeather(urlNextDays,false)
 })
 
-async function getWeather(url) {
+async function getWeather(url,current) {
     try {
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error("Error al obtener datos del servidor");
         }
         const data = await response.json();
+        if(current){
+            imprimirResultadosWeatherCurrent(data)
+        }else{
+            imprimirResultadosNextDays(data)
+        }
+        
         return data;
     } catch (error) {
         console.error('Error', error);
         throw error;
     }
 }
-
-function weatherCurrent(url){
-    const weatherCurrentPromise = new Promise((resolve, reject) => {
-        getWeather(urlCurrent)
-            .then(data => {
-                resolve(data); // Resolvemos la promesa con los datos obtenidos
-            })
-            .catch(error => {
-                reject(error); // Rechazamos la promesa con el error obtenido
-            });
-    });
-    
-    weatherCurrentPromise.then(resultado=>{
-        imprimirResultadosWeatherCurrent(resultado)
-    })
-    .catch(error=>{
-        console.error("Error",error)
-    })
-}
-
-function weatherNextDays(url){
-    const divTiempoNextDays=document.getElementById("tiempo_nextdays")
-    divTiempoNextDays.innerHTML=''
-    const weatherNextDaysPromise = new Promise((resolve, reject) => {
-        getWeather(urlNextDays)
-            .then(data => {
-                resolve(data); // Resolvemos la promesa con los datos obtenidos
-            })
-            .catch(error => {
-                reject(error); // Rechazamos la promesa con el error obtenido
-            });
-    });
-    
-    weatherNextDaysPromise.then(resultado=>{
-        console.log(resultado)
-        imprimirResultadosNextDays(resultado)
-    })
-    .catch(error=>{
-        console.error("Error",error)
-    })
-}
-
 
 
 function imprimirResultadosWeatherCurrent(res){
@@ -93,9 +58,6 @@ function imprimirResultadosWeatherCurrent(res){
     final=document.getElementById("final")
     console.log(final.firstChild)
     final.firstChild.textContent=`Ultima actualización: ${res.current.last_updated}`
-
-
-
 }
 
 function imprimirResultadosNextDays(res){
