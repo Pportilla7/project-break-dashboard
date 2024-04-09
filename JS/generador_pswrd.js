@@ -15,6 +15,7 @@ function generadorPassword(long){
     const tipo=[mayus,minus,numeros,simbolos]
     //Falta que haya una tipo de dato minimo por cada uno
     let password=[]
+    let comprobacion=false
 
     for (let i=0;i<long;i++)
     {
@@ -24,12 +25,44 @@ function generadorPassword(long){
         const indiceDatoAleatorio=Math.floor(Math.random()*tipoDatoAleatorio.length)
         const datoAleatorio=tipoDatoAleatorio[indiceDatoAleatorio]
 
-        console.log(indiceAleatorio,tipoDatoAleatorio,indiceDatoAleatorio,datoAleatorio)
         password.push(datoAleatorio)
     }
+    comprobacion=comprobarCantidadObligatoria(password)
+    if(!comprobacion)
+    {
+        console.log("la contraseña esta mal")
+        generadorPassword(long)
+    }
     const password_str=password.join('')
-    console.log(password_str,password_str.length)
+    
     const pPassword=document.getElementById("password")
-    console.log(pPassword)
+   
     pPassword.textContent=`Contraseña generada: ${password_str}`
+}
+
+function comprobarCantidadObligatoria(password){
+    const mayus = /[A-Z]/,
+        minus = /[a-z]/,
+        numeros = /[0-9]/,
+        simbolos = /[!@#$%^&*()-_=+]/;
+
+let tieneMayus = false,
+    tieneMinus = false,
+    tieneNumeros = false,
+    tieneSimbolos = false;
+
+password.forEach(element => {
+    if (mayus.test(element)) {
+        tieneMayus = true;
+    } else if (minus.test(element)) {
+        tieneMinus = true;
+    } else if (numeros.test(element)) {
+        tieneNumeros = true;
+    } else if (simbolos.test(element)) {
+        tieneSimbolos = true;
+    }
+});
+
+    if(tieneMayus && tieneMinus && tieneNumeros && tieneSimbolos)
+        return true
 }

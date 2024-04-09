@@ -13,14 +13,17 @@ getWeather(urlNextDays,false)
 boton.addEventListener("click",()=>{
     const ciudadInput = document.getElementById("ciudad");
     city = ciudadInput.value;
+
     urlCurrent=`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&aqi=no`
     urlNextDays=`https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=${days}&aqi=no`
 
+    console.log(urlNextDays)
     getWeather(urlCurrent,true)
     getWeather(urlNextDays,false)
 })
 
 async function getWeather(url,current) {
+    console.log(url)
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -28,8 +31,11 @@ async function getWeather(url,current) {
         }
         const data = await response.json();
         if(current){
+            console.log("imprimo los datos actuales")
             imprimirResultadosWeatherCurrent(data)
         }else{
+            console.log("imprimo los datos next days")
+            console.log(data)
             imprimirResultadosNextDays(data)
         }
         
@@ -46,32 +52,41 @@ function imprimirResultadosWeatherCurrent(res){
     encabezado.firstChild.textContent=`${res.location.name}/${res.location.country}. Hora local: ${res.location.localtime}`
     
     cuerpo=document.getElementById("cuerpo")
-    console.log(cuerpo.firstChild)
+    
     cuerpo.firstChild.textContent=`${res.current.temp_c}ºC`
     const img=document.getElementById("img_tiempo")
     img.src=res.current.condition.icon
     cuerpo.lastChild.textContent=`
-    Humedad: ${res.current.humidity}
-    Precipitacion: ${res.current.precip_mm}
-    Viento: ${res.current.wind_kph}
+        Humedad: ${res.current.humidity}
+        Precipitacion: ${res.current.precip_mm}
+        Viento: ${res.current.wind_kph}
     `
     final=document.getElementById("final")
-    console.log(final.firstChild)
+    
     final.firstChild.textContent=`Ultima actualización: ${res.current.last_updated}`
 }
 
 function imprimirResultadosNextDays(res){
-    console.log(res.forecast.forecastday[0].date)
-    const divTiempoNextDays=document.getElementById("tiempo_nextdays")
+    let j=1
     for (let i of res.forecast.forecastday){
-        console.log(i)
-        console.log(i.date)
-        divNextDay=document.createElement("div")
-        divNextDay.innerHTML=`
-        <p>${i.date}</p>
-        <img src="${i.day.condition.icon}" alt="">
-        <p>Min: ${i.day.mintemp_c}ºC  /  Max: ${i.day.maxtemp_c}ºC</p>
-        `
-        divTiempoNextDays.appendChild(divNextDay)
+        
+        let div=document.getElementById(`dia${j}`)
+        console.log(div)
+        imprimirHTML(i,div)
+        j+=1
     }
+
+}
+
+function imprimirHTML(i,div){
+    console.log(i,div)
+    const p1=div.firstChild
+    p1.textContent=`${i.date}`
+    const img = div.querySelector('img');
+    console.log(img)
+
+    img.src = `${i.day.condition.icon}`;
+    
+    const p2=div.lastChild
+    p2.textContent=`Min: ${i.day.mintemp_c}ºC  /  Max: ${i.day.maxtemp_c}ºC`
 }
