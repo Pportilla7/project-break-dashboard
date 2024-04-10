@@ -46,22 +46,22 @@ function comprobarCantidadObligatoria(password){
         numeros = /[0-9]/,
         simbolos = /[!@#$%^&*()-_=+]/;
 
-let tieneMayus = false,
-    tieneMinus = false,
-    tieneNumeros = false,
-    tieneSimbolos = false;
+    let tieneMayus = false,
+        tieneMinus = false,
+        tieneNumeros = false,
+        tieneSimbolos = false;
 
-password.forEach(element => {
-    if (mayus.test(element)) {
-        tieneMayus = true;
-    } else if (minus.test(element)) {
-        tieneMinus = true;
-    } else if (numeros.test(element)) {
-        tieneNumeros = true;
-    } else if (simbolos.test(element)) {
-        tieneSimbolos = true;
-    }
-});
+    password.forEach(element => {
+        if (mayus.test(element)) {
+            tieneMayus = true;
+        } else if (minus.test(element)) {
+            tieneMinus = true;
+        } else if (numeros.test(element)) {
+            tieneNumeros = true;
+        } else if (simbolos.test(element)) {
+            tieneSimbolos = true;
+        }
+    });
 
     if(tieneMayus && tieneMinus && tieneNumeros && tieneSimbolos)
         return true
