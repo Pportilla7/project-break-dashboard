@@ -1,22 +1,16 @@
-const cantidaFotos=13
+
 
 imprimirImagen()
 
-function elegirFotoAleatoria(){
+function imprimirImagen(){
+    const cantidaFotos=13
     let numImagen=Math.floor(Math.random()*cantidaFotos)
     let imagen=numImagen.toString()+'.jpg'
-    return imagen
-}
-
-function imprimirImagen(){
-    const imgBorrar=document.querySelector("img")
-    imgBorrar.remove()
-    const body=document.querySelector("body")
    
-    let img=document.createElement('img')
-    let imagen=elegirFotoAleatoria()
-    img.src=`/IMG/${imagen}`
-    body.appendChild(img)
+    document.body.style.backgroundSize = "cover";
+    document.body.style.backgroundImage = `url(/IMG/${imagen})`;
 }
 
-setInterval(imprimirImagen,3000)
+export{imprimirImagen}
+
+setInterval(imprimirImagen,15000)
