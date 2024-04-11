@@ -1,0 +1,14 @@
+#reloj {
+    text-align: center; /* Centra el contenido horizontalmente */
+    margin-bottom: 20px; /* Espacio entre el reloj y la frase */
+}
+
+#reloj #fecha,
+#reloj #hora {
+    font-size: 24px; /* Tamaño de la fuente */
+}
+
+#frase {
+    text-align: center; /* Centra el contenido horizontalmente */
+    font-size: 18px; /* Tamaño de la fuente */
+}

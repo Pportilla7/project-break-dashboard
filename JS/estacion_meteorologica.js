@@ -1,3 +1,4 @@
+
 const apiKey="20f4a9d00fe443d7a9390954240604"
 let city="madrid"
 const days=5
@@ -48,13 +49,16 @@ async function getWeather(url,current) {
 
 
 function imprimirResultadosWeatherCurrent(res){
-    encabezado=document.getElementById("encabezado")
+    const divTiempoActual=document.getElementById("tiempoActual")
+    const encabezado=document.getElementById("encabezado")
+    console.log(divTiempoActual,encabezado)
     encabezado.firstChild.textContent=`${res.location.name}/${res.location.country}. Hora local: ${res.location.localtime}`
     
-    cuerpo=document.getElementById("cuerpo")
+    const cuerpo=document.getElementById("cuerpo")
     
     cuerpo.firstChild.textContent=`${res.current.temp_c}ºC`
     const img=document.getElementById("img_tiempo")
+    console.log(img)
     img.src=res.current.condition.icon
     cuerpo.lastChild.textContent=`
         Humedad: ${res.current.humidity}
@@ -90,3 +94,9 @@ function imprimirHTML(i,div){
     const p2=div.lastChild
     p2.textContent=`Min: ${i.day.mintemp_c}ºC  /  Max: ${i.day.maxtemp_c}ºC`
 }
+
+
+
+import imprimirImagen from "./imagenes_random.js"
+
+imprimirImagen()

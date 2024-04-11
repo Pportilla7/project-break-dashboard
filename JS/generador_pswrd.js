@@ -1,3 +1,7 @@
+import imprimirImagen from "./imagenes_random.js"
+
+imprimirImagen()
+
 const boton=document.getElementById("boton")
 
 const mayus="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -34,7 +38,7 @@ function generadorPassword(long){
         generadorPassword(long)
     }
     const password_str=password.join('')
-    
+    console.log(password)
     const pPassword=document.getElementById("password")
    
     pPassword.textContent=`Contraseña generada: ${password_str}`
@@ -66,3 +70,4 @@ function comprobarCantidadObligatoria(password){
     if(tieneMayus && tieneMinus && tieneNumeros && tieneSimbolos)
         return true
 }
+

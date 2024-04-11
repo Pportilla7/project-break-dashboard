@@ -1,0 +1,38 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif; /* Fuente predeterminada */
+    margin: 0; /* Eliminar margen predeterminado */
+    padding: 0; /* Eliminar relleno predeterminado */
+}
+
+/* Estilos para la sección tiempoActual */
+#tiempoActual {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px; /* Espacio entre tiempoActual y tiempo_nextdays */
+}
+
+/* Estilos para la sección tiempo_nextdays */
+#tiempo_nextdays {
+    display: flex; /* Utilizar flexbox para alinear los días */
+    justify-content: space-around; /* Distribuir los días uniformemente */
+}
+
+/* Estilos para cada día */
+#tiempo_nextdays > div {
+    width: 18%; /* Ancho fijo para cada día */
+    text-align: center; /* Centrar el contenido */
+}
+
+/* Estilos para el formulario */
+#formulario_ciudad {
+    margin-top: 20px; /* Espacio entre la sección de tiempo actual y el formulario */
+}
+
+/* Estilos para las imágenes */
+img {
+    max-width: 100%; /* Imágenes se ajustarán al ancho del contenedor */
+    height: auto; /* Mantener la proporción de aspecto */
+}

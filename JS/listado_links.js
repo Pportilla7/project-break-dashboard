@@ -94,3 +94,7 @@ window.addEventListener('load', ()=>{
     }
     console.log("se carga la pagina y se imprimen todos los links almacenados")
 });
+
+import imprimirImagen from "./imagenes_random.js"
+
+imprimirImagen()

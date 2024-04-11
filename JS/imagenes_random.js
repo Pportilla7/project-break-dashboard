@@ -1,5 +1,3 @@
-
-
 imprimirImagen()
 
 function imprimirImagen(){
@@ -10,7 +8,6 @@ function imprimirImagen(){
     document.body.style.backgroundSize = "cover";
     document.body.style.backgroundImage = `url(/IMG/${imagen})`;
 }
-
-export{imprimirImagen}
-
 setInterval(imprimirImagen,15000)
+
+export default imprimirImagen

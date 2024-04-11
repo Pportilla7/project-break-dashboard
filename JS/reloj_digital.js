@@ -1,3 +1,7 @@
+import imprimirImagen from "./imagenes_random.js"
+
+imprimirImagen()
+
 const div=document.getElementById("reloj")
 
 const divFecha=document.getElementById("fecha")
@@ -24,17 +28,17 @@ function actualizarHorayFecha() {
     console.log(segundos.length)
     if(segundos.length<2)
     {
-        aux=segundos
+        let aux=segundos
         segundos="0"+aux
     }
     if(minutos.length<2)
     {
-        aux=minutos
+        let aux=minutos
         minutos="0"+aux
     }
     if(hora.length<2)
     {
-        aux=hora
+        let aux=hora
         hora="0"+aux
     }
 
