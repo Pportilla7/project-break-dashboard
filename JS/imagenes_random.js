@@ -1,3 +1,5 @@
+import {actualizarHorayFecha, getFrase,imprimirPantalla} from "./reloj_digital.js";
+
 imprimirImagen()
 
 function imprimirImagen(){
@@ -11,3 +13,15 @@ function imprimirImagen(){
 setInterval(imprimirImagen,15000)
 
 export default imprimirImagen
+
+
+
+const divReloj = document.getElementById("reloj");
+console.log(divReloj)
+
+divReloj.addEventListener("click", function() {
+    console.log("He pulsado el div")
+    actualizarHorayFecha()
+    window.location.href = "/HTML/reloj_digital.html";
+
+});

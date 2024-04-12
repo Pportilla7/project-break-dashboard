@@ -3,6 +3,7 @@ body {
     font-family: Arial, sans-serif; /* Fuente predeterminada */
     margin: 0; /* Eliminar margen predeterminado */
     padding: 0; /* Eliminar relleno predeterminado */
+    color: white;
 }
 
 /* Estilos para la sección tiempoActual */

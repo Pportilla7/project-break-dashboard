@@ -11,6 +11,7 @@ const divHora=document.getElementById("hora")
 const divFrase=document.getElementById("frase")
 
 function actualizarHorayFecha() {
+    console.log("estoy aqui")
     const fechaActual = new Date();
 
     const fechaStr=fechaActual.toDateString();
@@ -25,42 +26,16 @@ function actualizarHorayFecha() {
     let hora = fechaActual.getHours().toString();
     let minutos = fechaActual.getMinutes().toString();
     let segundos = fechaActual.getSeconds().toString();
-    console.log(segundos.length)
-    if(segundos.length<2)
-    {
-        let aux=segundos
-        segundos="0"+aux
-    }
-    if(minutos.length<2)
-    {
-        let aux=minutos
-        minutos="0"+aux
-    }
-    if(hora.length<2)
-    {
-        let aux=hora
-        hora="0"+aux
-    }
 
-    divFecha.innerHTML=`
-        <p>${diaSemana}</p>
-        <div>
-            <p>${diaMes} ${mes}</p>
-            <p id="año">${anio}</p>
-        </div>
-    `
+    let frase=getFrase(hora,minutos)
 
-    divHora.innerHTML = `
-    <p>${hora}:${minutos}:${segundos}</p>
-    `;
+    imprimirPantalla(diaSemana,diaMes,mes,anio,hora,minutos,segundos,frase)   
+}
 
-    if(((parseInt(hora)>=18) && (parseInt(minutos)>=1)) && (parseInt(hora)<22))
-    {
-        console.log("")
-    }
+export {actualizarHorayFecha, getFrase, imprimirPantalla}
 
+function getFrase(hora,minutos){
     let frase
-
     if ((hora === 0 && minutos >= 1) && (hora < 7)) {
         console.log("Es hora de descansar. Apaga y sigue mañana");
         frase="Es hora de descansar. Apaga y sigue mañana"
@@ -88,6 +63,38 @@ function actualizarHorayFecha() {
                             console.log("Buenas noches, es hora de pensar en parar y descansar");
                             frase="Es hora de descansar. Apaga y sigue mañana"
                         }
+    return frase
+}
+
+function imprimirPantalla(diaSemana,diaMes,mes,anio,hora,minutos,segundos,frase){
+    if(segundos.length<2)
+    {
+        let aux=segundos
+        segundos="0"+aux
+    }
+    if(minutos.length<2)
+    {
+        let aux=minutos
+        minutos="0"+aux
+    }
+    if(hora.length<2)
+    {
+        let aux=hora
+        hora="0"+aux
+    }
+
+    divFecha.innerHTML=`
+        <p>${diaSemana}</p>
+        <div>
+            <p>${diaMes} ${mes}</p>
+            <p id="año">${anio}</p>
+        </div>
+    `
+
+    divHora.innerHTML = `
+    <p>${hora}:${minutos}:${segundos}</p>
+    `;
+    
     divFrase.innerHTML=`
         <p>${frase}</p>
     `

@@ -12,30 +12,19 @@
 </head>
 <body>
     <h1>Dashboard</h1>
-    <div id="reloj">
+    <div id="reloj_principal">
         <div id="reloj">
             <div id="fecha"></div>
             <div id="hora"></div>
         </div>
-        <div id="frase"></div>
+        <div id="frase" hidden></div>
         <script type="module" src="/JS/reloj_digital.js"></script>
     </div>
     <div id="bodydiv">
-        <div id="listado">
-            <h1>Listado de Links</h1>
-            <div id="linkForm">
-                <input type="text" id="tituloInput" placeholder="Título del enlace">
-                <input type="text" id="enlaceInput" placeholder="URL del enlace">
-                <button id="agregarLink">Añadir Link</button>  
-            </div>
-            <div id="listaLinks">
-            </div>
-            <script type="module" src="/JS/listado_links.js"></script>
-        </div>
+        
         <div id="bloque">
             <div id="contraseña">
-                <h3>Se encuentra en un generador de contraseñas donde podrá seleccionar la longitud de la contraseña</h3>
-                <p>**La longitud sera entre 12 y 50 caracteres**</p>
+                <h3>Generador de contraseñas</h3>
                 <form >
                     <input type="number" id="longitud" min="12" max="50">
                     <label for="longitud">Selecciona longitud contraseña</label>
@@ -44,55 +33,66 @@
                 <p id="password"></p>
                 <script type="module" src="/JS/generador_pswrd.js"></script>
             </div>
-            <div id="estacion">
-                <div id="tiempoActual">
-                    <div id="encabezado">
-                        <p></p>
-                        <p></p>
-                    </div>
-                    <div id="cuerpo">
-                        <p></p>
-                        <img id="img_tiempo">
-                        <p></p>
-                    </div>
-                    <div id="final">
-                        <p></p>
-                    </div>
-                    <div id="formulario_ciudad">
-                        <label for="ciudad">Introduce el nombre de la ciudad:</label>
-                        <input type="text" id="ciudad" name="ciudad">
-                        <button id="buscar_ciudad">Buscar</button>
-                    </div>
+            <div id="listado">
+                <h1>Listado de Links</h1>
+                <div id="linkForm">
+                    <input type="text" id="tituloInput" placeholder="Título del enlace">
+                    <input type="text" id="enlaceInput" placeholder="URL del enlace">
+                    <button id="agregarLink">Añadir Link</button>  
                 </div>
-                <div id="tiempo_nextdays">
-                    <div id="dia1">
-                        <p></p>
-                        <img src="" alt="">
-                        <p></p>
-                    </div>
-                    <div id="dia2">
-                        <p></p>
-                        <img src="" alt="">
-                        <p></p>
-                    </div>
-                    <div id="dia3">
-                        <p></p>
-                        <img src="" alt="">
-                        <p></p>
-                    </div>
-                    <div id="dia4">
-                        <p></p>
-                        <img src="" alt="">
-                        <p></p>
-                    </div>
-                    <div id="dia5">
-                        <p></p>
-                        <img src="" alt="">
-                        <p></p>
-                    </div>
+                <div id="listaLinks">
                 </div>
-                <script type="module" src="/JS/estacion_meteorologica.js"></script>
+                <script type="module" src="/JS/listado_links.js"></script>
             </div>
+        </div>
+        <div id="estacion">
+            <div id="tiempoActual">
+                <div id="encabezado">
+                    <p></p>
+                    <p></p>
+                </div>
+                <div id="cuerpo">
+                    <p></p>
+                    <img id="img_tiempo">
+                    <p></p>
+                </div>
+                <div id="final">
+                    <p></p>
+                </div>
+                <div id="formulario_ciudad">
+                    <label for="ciudad">Introduce el nombre de la ciudad:</label>
+                    <input type="text" id="ciudad" name="ciudad">
+                    <button id="buscar_ciudad">Buscar</button>
+                </div>
+            </div>
+            <div id="tiempo_nextdays">
+                <div id="dia1">
+                    <p></p>
+                    <img src="" alt="">
+                    <p></p>
+                </div>
+                <div id="dia2">
+                    <p></p>
+                    <img src="" alt="">
+                    <p></p>
+                </div>
+                <div id="dia3">
+                    <p></p>
+                    <img src="" alt="">
+                    <p></p>
+                </div>
+                <div id="dia4">
+                    <p></p>
+                    <img src="" alt="">
+                    <p></p>
+                </div>
+                <div id="dia5">
+                    <p></p>
+                    <img src="" alt="">
+                    <p></p>
+                </div>
+            </div>
+            <script type="module" src="/JS/estacion_meteorologica.js"></script>
         </div>
     </div>
 </body>
