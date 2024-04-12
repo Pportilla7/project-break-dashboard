@@ -1,3 +1,7 @@
+import imprimirImagen from "./imagenes_random.js"
+imprimirImagen()
+
+
 function agregarLink(titulo, link) {
     console.log(titulo,link)
     const links=cargarLinksGuardados()
@@ -41,6 +45,8 @@ function imprimirLink(titulo, link) {
 
     document.getElementById('listaLinks').appendChild(divLink);
 }
+
+export { agregarLink, cargarTitulosGuardados, cargarLinksGuardados, imprimirLink }
 
 document.getElementById('listaLinks').addEventListener('click', function(event) {
     console.log("detecto el evento")
@@ -95,6 +101,4 @@ window.addEventListener('load', ()=>{
     console.log("se carga la pagina y se imprimen todos los links almacenados")
 });
 
-import imprimirImagen from "./imagenes_random.js"
 
-imprimirImagen()

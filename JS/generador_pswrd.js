@@ -1,7 +1,3 @@
-import imprimirImagen from "./imagenes_random.js"
-
-imprimirImagen()
-
 const boton=document.getElementById("boton")
 
 const mayus="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -71,3 +67,6 @@ function comprobarCantidadObligatoria(password){
         return true
 }
 
+import imprimirImagen from "./imagenes_random.js"
+
+imprimirImagen()
